@@ -4,6 +4,17 @@ from InOutBuffer import InOutBuffer
 from dff import dff
 
 def ReadWriteFlipFlop(t, dir, wr, rst):
+    """ A scalable Tri-State Buffer
+
+    I/O pins:
+    --------
+    t   : tristated buffer the data comes in on and leaves out. 
+    dir : input; signal driving direction of tristate buffer.
+    wr  : input; signal indicating when to latch data.
+    rst : input; signal indicating clear of latch data.
+
+    """
+
     i = Signal(intbv(0)[len(t):])
     q = Signal(intbv(0)[len(t):])
     data = InOutBuffer(t, i, q, dir)

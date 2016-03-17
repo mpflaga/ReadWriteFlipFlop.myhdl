@@ -1,6 +1,16 @@
 from myhdl import toVerilog, toVHDL, always, Signal, intbv
 
 def dff(q, d, wr, rst):
+    """ A scalable Tri-State Buffer
+
+    I/O pins:
+    --------
+    q   : output; buffer the data comes in on and leaves out. 
+    d   : input; signal to be latched.
+    wr  : input; signal indicating when to latch data.
+    rst : input; signal indicating clear of latch data.
+
+    """
 
     @always(wr.posedge, rst.negedge)
     def logic():

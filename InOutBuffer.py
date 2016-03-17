@@ -1,16 +1,25 @@
 from myhdl import always_comb, TristateSignal, Signal, toVerilog, toVHDL
 
 def InOutBuffer(t, i, o, dir):
-     """Simple Tri-State Buffer.
-     """
-     b_d = t.driver()
+    """ A scalable Tri-State Buffer
 
-     @always_comb
-     def hdl():
-         i.next = t
-         b_d.next = o if dir else None
+    I/O pins:
+    --------
+    t   : tristated buffer the data comes in on and leaves out. 
+    i   : output; signal from the tristate buffer.
+    o   : input; signal to go out on the tristate buffer.
+    dir : input; signal driving direction of tristate buffer.
 
-     return hdl
+    """
+    
+    b_d = t.driver()
+
+    @always_comb
+    def hdl():
+        i.next = t
+        b_d.next = o if dir else None
+
+    return hdl
 
 
 def convert():
